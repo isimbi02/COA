@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Transformation</title>
+    <script>
+        
+
+        function reverseString(str) {
+            return str.split('').reverse().join('');
+        }
+
+        function replaceWithASCII(str) {
+            let asciiResult = '';
+            for (let i = 0; i < str.length; i++) {
+                asciiResult += str.charCodeAt(i) + ' ';
+            }
+            return asciiResult.trim();
+        }
+
+        function transformAndDisplay() {
+            const userInput = document.getElementById("userInput").value;
+            const transformedString = transformString(userInput);
+            document.getElementById("result").textContent = "Transformed String: " + transformedString;
+        }
+
+        function transformString(str) {
+            let result = str;
+            
+            if (str.length % 3 === 0 && str.length % 5 === 0) {
+                result = reverseString(replaceWithASCII(result));
+            } else {
+                if (str.length % 3 === 0) {
+                    result = reverseString(result);
+                }
+                
+                if (str.length % 5 === 0) {
+                    result = replaceWithASCII(result);
+                }
+            }
+            
+            return result;
+        }
+    </script>
+</head>
+<body>
+    <h1>String Transformation</h1>
+    <label for="userInput">Enter a string:</label>
+    <input type="text" id="userInput">
+    <button onclick="transformAndDisplay()">Transform</button>
+    <p id="result"></p>
+</body>
+</html>

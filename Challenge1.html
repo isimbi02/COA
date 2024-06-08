@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subarray with Target Sum</title>
+    <script>
+        function hasSubarrayWithSum(arr, target) {
+            let windowSum = 0;
+            let windowStart = 0;
+
+            for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+                windowSum += arr[windowEnd];
+                
+                while (windowSum >= target) {
+                    if (windowSum === target) {
+                        return true;
+                    }
+                    windowSum -= arr[windowStart];
+                    windowStart++;
+                }
+            }
+
+            return false;
+        }
+
+        function getInputAndCheck() {
+            const inputString = document.getElementById("inputArray").value;
+            const targetSum = parseInt(document.getElementById("targetSum").value);
+            const inputArray = inputString.split(",").map(Number);
+
+            const result = hasSubarrayWithSum(inputArray, targetSum);
+            document.getElementById("result").textContent = "Does a subarray with the target sum exist? " + result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Subarray with Target Sum</h1>
+    <label for="inputArray">Enter the elements of the array separated by commas:</label>
+    <input type="text" id="inputArray"><br><br>
+    <label for="targetSum">Enter the target sum:</label>
+    <input type="text" id="targetSum"><br><br>
+    <button onclick="getInputAndCheck()">Check</button>
+    <p id="result"></p>
+</body>
+</html>
